@@ -50,6 +50,22 @@ class tictactoeTests: XCTestCase {
         
         game.reset()
         XCTAssertTrue(game.board.filter{ $0 == TicTacToe.empty }.count == game.board.count)
+        XCTAssertEqual(GameState.playing, game.state)
+    }
+    
+    func testResetGameAfterGameEnded() {
+        let game = TicTacToe()
+        game.makeMove(at: 0) //X
+        game.makeMove(at: 4) //O
+        game.makeMove(at: 1) //X
+        game.makeMove(at: 5) //O
+        let state = game.makeMove(at: 2) //X
+
+        XCTAssertEqual(state, GameState.win(Player.X))
+        
+        game.reset()
+        XCTAssertTrue(game.board.filter{ $0 == TicTacToe.empty }.count == game.board.count)
+        XCTAssertEqual(GameState.playing, game.state)
     }
     
     func testNextPlayer() {
