@@ -18,7 +18,8 @@ class TicTacToe {
     func makeMove(at index: Int) -> GameState {
         // Invalid move
         if index < 0 || index >= board.count || board[index] != TicTacToe.empty {
-            return .invalidMove
+            state = .invalidMove
+            return state
         }
         // Move
         board[index] = activePlayer.sign
@@ -28,20 +29,24 @@ class TicTacToe {
             if board[winningBoard[0]] != TicTacToe.empty && board[winningBoard[0]] == board[winningBoard[1]] && board[winningBoard[0]] == board[winningBoard[2]] {
                 if board[winningBoard[0]] == Player.X.sign {
                     print("X wins")
-                    return .win(Player.X)
+                    state = .win(Player.X)
+                    return state
                 } else {
                     print("O wins")
-                    return .win(Player.O)
+                    state = .win(Player.O)
+                    return state
                 }
             }
         }
         let moveCount = board.filter{ $0 != TicTacToe.empty }.count
         if moveCount == board.count {
-            return .draw
+            state = .draw
+            return state
         }
      
         activePlayer = activePlayer == Player.X ? Player.O : Player.X
-        return .playing
+        state = .playing
+        return state
     }
     
     func reset() {
