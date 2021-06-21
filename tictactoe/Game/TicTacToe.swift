@@ -27,15 +27,8 @@ class TicTacToe {
         // Win
         for winningBoard in TicTacToe.winningBoards {
             if board[winningBoard[0]] != TicTacToe.empty && board[winningBoard[0]] == board[winningBoard[1]] && board[winningBoard[0]] == board[winningBoard[2]] {
-                if board[winningBoard[0]] == Player.X.sign {
-                    print("X wins")
-                    state = .win(Player.X)
-                    return state
-                } else {
-                    print("O wins")
-                    state = .win(Player.O)
-                    return state
-                }
+                state = .win(activePlayer)
+                return state
             }
         }
         let moveCount = board.filter{ $0 != TicTacToe.empty }.count
