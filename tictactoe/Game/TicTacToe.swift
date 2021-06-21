@@ -14,32 +14,56 @@ class TicTacToe {
     var board = Array(repeating: TicTacToe.empty, count: 9)
     var activePlayer: Player = Player.X
     var state = GameState.playing
-
+    
+    @discardableResult
     func makeMove(at index: Int) -> GameState {
-        // Invalid move
-        if index < 0 || index >= board.count || board[index] != TicTacToe.empty {
-            state = .invalidMove
+        if let state = checkInvalidMove(index) {
             return state
         }
         // Move
         board[index] = activePlayer.sign
         
-        // Win
+        if let state = checkWin() {
+            return state
+        }
+        if let state = checkDraw() {
+            return state
+        }
+        
+        activePlayer = nextPlayer()
+        state = .playing
+        return state
+    }
+    
+    private func checkInvalidMove(_ index: Int) -> GameState? {
+        if index < 0 || index >= board.count || board[index] != TicTacToe.empty {
+            state = .invalidMove
+            return state
+        }
+        return nil
+    }
+    
+    private func checkWin() -> GameState? {
         for winningBoard in TicTacToe.winningBoards {
             if board[winningBoard[0]] != TicTacToe.empty && board[winningBoard[0]] == board[winningBoard[1]] && board[winningBoard[0]] == board[winningBoard[2]] {
                 state = .win(activePlayer)
                 return state
             }
         }
+        return nil
+    }
+    
+    private func checkDraw() -> GameState? {
         let moveCount = board.filter{ $0 != TicTacToe.empty }.count
         if moveCount == board.count {
             state = .draw
             return state
         }
-     
-        activePlayer = activePlayer == Player.X ? Player.O : Player.X
-        state = .playing
-        return state
+        return nil
+    }
+    
+    private func nextPlayer() -> Player {
+        return activePlayer == Player.X ? Player.O : Player.X
     }
     
     func reset() {
