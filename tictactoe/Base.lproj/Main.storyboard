@@ -146,6 +146,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x7J-gP-5ji">
                                 <rect key="frame" x="171.5" y="720" width="71" height="30"/>
                                 <state key="normal" title="Play Again"/>
+                                <connections>
+                                    <action selector="playAgain:" destination="BYZ-38-t0r" eventType="touchUpInside" id="guB-bY-xqJ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -165,6 +168,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="playAgainButton" destination="x7J-gP-5ji" id="SZt-nx-5FL"/>
+                        <outlet property="resultLabel" destination="2d0-E6-FgY" id="0kW-TM-LmC"/>
                         <outletCollection property="buttons" destination="1vg-d0-pM2" collectionClass="NSMutableArray" id="XvS-tF-71h"/>
                         <outletCollection property="buttons" destination="wWd-yu-byE" collectionClass="NSMutableArray" id="03M-Lo-g5K"/>
                         <outletCollection property="buttons" destination="yFX-dM-kt0" collectionClass="NSMutableArray" id="cYY-l0-Btz"/>

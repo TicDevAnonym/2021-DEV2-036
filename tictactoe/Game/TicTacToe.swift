@@ -51,5 +51,8 @@ class TicTacToe {
     
     func reset() {
         board.removeAll()
+        board = Array(repeating: TicTacToe.empty, count: 9)
+        state = .playing
+        activePlayer = Player.X
     }
 }
