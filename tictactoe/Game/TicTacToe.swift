@@ -17,7 +17,7 @@ class TicTacToe {
 
     func makeMove(at index: Int) -> GameState {
         // Invalid move
-        if board[index] != TicTacToe.empty {
+        if index < 0 || index >= board.count || board[index] != TicTacToe.empty {
             return .invalidMove
         }
         // Move
