@@ -35,7 +35,10 @@ class TicTacToe {
                 }
             }
         }
-        
+        let moveCount = board.filter{ $0 != TicTacToe.empty }.count
+        if moveCount == board.count {
+            return .draw
+        }
      
         activePlayer = activePlayer == Player.X ? Player.O : Player.X
         return .playing
